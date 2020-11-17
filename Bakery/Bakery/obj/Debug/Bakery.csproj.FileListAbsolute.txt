@@ -1,0 +1,6 @@
+D:\Study\EPAM-training\EpamTask-1\Bakery\Bakery\bin\Debug\Bakery.dll
+D:\Study\EPAM-training\EpamTask-1\Bakery\Bakery\bin\Debug\Bakery.pdb
+D:\Study\EPAM-training\EpamTask-1\Bakery\Bakery\obj\Debug\Bakery.csproj.CoreCompileInputs.cache
+D:\Study\EPAM-training\EpamTask-1\Bakery\Bakery\obj\Debug\Bakery.dll
+D:\Study\EPAM-training\EpamTask-1\Bakery\Bakery\obj\Debug\Bakery.pdb
+D:\Study\EPAM-training\EpamTask-1\Bakery\Bakery\obj\Debug\Bakery.csprojAssemblyReference.cache
