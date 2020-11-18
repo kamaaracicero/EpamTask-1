@@ -1,9 +1,9 @@
 ﻿using Bakery.Interfaces;
 using System.IO;
 
-namespace Bakery
+namespace Bakery.StandartMethods
 {
-    internal class Reader : IBakeryReader
+    internal class StandartReader : IBakeryReader
     {
         public string[] ReadFile(FileStream file)
         {

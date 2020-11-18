@@ -42,14 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bakery.cs" />
+    <Compile Include="Comparers\CaloriesComparer.cs" />
+    <Compile Include="Comparers\CostComparer.cs" />
+    <Compile Include="Comparers\TotalCostComparer.cs" />
+    <Compile Include="Comparers\TypeOfSort.cs" />
     <Compile Include="Interfaces\IBakeryConverter.cs" />
     <Compile Include="Interfaces\IBakeryReader.cs" />
     <Compile Include="Interfaces\IBakerySaver.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StandartMethods\Converter.cs" />
-    <Compile Include="StandartMethods\Reader.cs" />
-    <Compile Include="StandartMethods\Saver.cs" />
+    <Compile Include="StandartMethods\StandartConverter.cs" />
+    <Compile Include="StandartMethods\StandartReader.cs" />
+    <Compile Include="StandartMethods\StandartSaver.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
