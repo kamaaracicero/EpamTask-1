@@ -7,9 +7,19 @@ namespace Bakery.StandartMethods
 {
     internal class StandartConverter : IBakeryConverter
     {
-        Regex productRegex;
-        Regex ingredientRegex;
+        /// <summary>
+        /// Standart regex pattern for product string
+        /// </summary>
+        readonly Regex productRegex;
 
+        /// <summary>
+        /// Standart regex pattern for ingredient string
+        /// </summary>
+        readonly Regex ingredientRegex;
+
+        /// <summary>
+        /// Class constructor
+        /// </summary>
         public StandartConverter()
         {
             productRegex = new Regex(@"^(\w+\s*\w*)\s+Amount:(\d+)\s+Markup:(\d+)\%");
@@ -30,16 +40,18 @@ namespace Bakery.StandartMethods
             return products;
         }
 
+        /// <summary>
+        /// Method to convert strings to Product class
+        /// </summary>
+        /// <param name="strings">Array of file strings</param>
+        /// <param name="currentString">Counter for strings</param>
+        /// <returns>New Product class</returns>
         public Product GetProductClass(string[] strings, ref int currentString)
         {
             List<(string name, double cost, int calories)> ingredients = new List<(string name, double cost, int calories)>();
-            string productName;
-            int productAmount;
-            int productMarkup;
+            ConvertStringToProduct(out string productName, out int productAmount, out int productMarkup, strings[currentString]);
+
             int index;
-
-            ConvertStringToProduct(out productName, out productAmount, out productMarkup, strings[currentString]);
-
             for (index = currentString + 1; index < strings.Length; index++)
             {
                 if (ingredientRegex.IsMatch(strings[index]))
@@ -54,6 +66,13 @@ namespace Bakery.StandartMethods
             return new Product(productName, productAmount, productMarkup, ingredients);
         }
 
+        /// <summary>
+        /// Method to convert string to product main properties
+        /// </summary>
+        /// <param name="name">Product name</param>
+        /// <param name="amount">Product amount</param>
+        /// <param name="markup">Amount for this product</param>
+        /// <param name="string">File string</param>
         private void ConvertStringToProduct(out string name, out int amount, out int markup, string @string)
         {
             Match productString = productRegex.Match(@string);
@@ -66,6 +85,11 @@ namespace Bakery.StandartMethods
             else throw new Exception("Inappropriate string");
         }
 
+        /// <summary>
+        /// Method to convert string to ingredient
+        /// </summary>
+        /// <param name="string">File string</param>
+        /// <returns>Ingredient tuple</returns>
         private (string name, double cost, int calories) ConvertStringToIngredient(string @string)
         {
             string name;
