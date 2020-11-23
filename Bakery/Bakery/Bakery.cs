@@ -50,7 +50,28 @@ namespace Bakery
             {
                 MessageEvent(fileEx.Message);
             }
+        }
 
+        public List<Product> GetClonedListOfProduct(TypeOfSort type)
+        {
+            List<Product> productsClone = new List<Product>();
+            foreach (Product product in products)
+            {
+                productsClone.Add(product.Clone() as Product);
+            }
+            switch (type)
+            {
+                case TypeOfSort.ByCalories:
+                    productsClone.Sort(new CaloriesComparer());
+                    break;
+                case TypeOfSort.ByCost:
+                    productsClone.Sort(new CostComparer());
+                    break;
+                case TypeOfSort.ByFullCost:
+                    productsClone.Sort(new TotalCostComparer());
+                    break;
+            }
+            return productsClone;
         }
 
         public void SortProduction(TypeOfSort type)
@@ -61,7 +82,7 @@ namespace Bakery
                     products.Sort(new CaloriesComparer());
                     break;
                 case TypeOfSort.ByCost:
-                    products.Sort();
+                    products.Sort(new CostComparer());
                     break;
                 case TypeOfSort.ByFullCost:
                     products.Sort(new TotalCostComparer());
@@ -76,7 +97,7 @@ namespace Bakery
             {
                 @string.Append("--Public--\n");
                 @string.Append("Name - " + product.Name + "; \n\tAmount: " + product.Amount + "; \n\tCost: " + product.Cost + "; \n\tCalories: " + product.Calories + "; \n\tFullCost: " + product.FullCost + "\n");
-                @string.Append(product);
+                //@string.Append(product);
             }
             return @string.ToString();
         }

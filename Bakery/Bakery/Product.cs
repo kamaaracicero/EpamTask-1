@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Bakery
 {
-    public class Product
+    public class Product : ICloneable
     {
         private List<(string name, double cost, int calories)> ingredients = new List<(string name, double cost, int calories)>();
         private int markup = 0;
@@ -55,17 +55,33 @@ namespace Bakery
             this.ingredients = ingredients;
         }
 
+        public object Clone()
+        {
+            return new Product(this.Name, this.Amount, this.markup, this.ingredients);
+        }
+
         public override string ToString()
         {
             StringBuilder @string = new StringBuilder();
             @string.Append("--Private--\n");
             @string.Append("\tMarkup: " + markup + "%\n\n");
-            /*@string.Append("--Ingredients--\n");
+            @string.Append("--Ingredients--\n");
             foreach(var ingredient in ingredients)
             {
                 @string.Append("\t" + ingredient.name + " Cost: " + ingredient.cost + " Calories: " + ingredient.calories + "\n");
-            }*/
+            }
+            @string.Append("\n\n");
             return @string.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

@@ -16,19 +16,21 @@ namespace Bakery.StandartMethods
             ingredientRegex = new Regex(@"\t+(\w+\s?\w*)\s+(\d+[,]*\d*)kg\s(\d+)cal\s+(\d+[,]*\d*)\$");
         }
 
-        // Probably need some changes
         public List<Product> ConvertFileStrings(string[] strings)
         {
             int index = 0;
             List<Product> products = new List<Product>();
             while (index < strings.Length)
             {
-                products.Add(GetProductClass(strings, ref index));
+                if (!String.IsNullOrEmpty(strings[index]) && strings[index] != "\r")
+                    products.Add(GetProductClass(strings, ref index));
+                else
+                    index++;
             }
             return products;
         }
 
-        public Product GetProductClass(string[] strings, ref int stopPlace)
+        public Product GetProductClass(string[] strings, ref int currentString)
         {
             List<(string name, double cost, int calories)> ingredients = new List<(string name, double cost, int calories)>();
             string productName;
@@ -36,18 +38,18 @@ namespace Bakery.StandartMethods
             int productMarkup;
             int index;
 
-            ConvertStringToProduct(out productName, out productAmount, out productMarkup, strings[stopPlace]);
-            stopPlace++;
+            ConvertStringToProduct(out productName, out productAmount, out productMarkup, strings[currentString]);
 
-            for (index = stopPlace; index < strings.Length; index++)
+            for (index = currentString + 1; index < strings.Length; index++)
             {
                 if (ingredientRegex.IsMatch(strings[index]))
                 {
                     ingredients.Add(ConvertStringToIngredient(strings[index]));
                 }
+                else if (string.IsNullOrEmpty(strings[index]) || strings[index] == "\r") continue;
                 else break;
             }
-            stopPlace = index;
+            currentString = index;
 
             return new Product(productName, productAmount, productMarkup, ingredients);
         }

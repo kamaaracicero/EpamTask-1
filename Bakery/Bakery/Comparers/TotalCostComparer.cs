@@ -7,9 +7,9 @@ namespace Bakery.Comparers
         public int Compare(Product first, Product second)
         {
             if (first.FullCost > second.FullCost)
-                return 1;
-            else if (first.FullCost < second.FullCost)
                 return -1;
+            else if (first.FullCost < second.FullCost)
+                return 1;
             else
                 return 0;
         }
