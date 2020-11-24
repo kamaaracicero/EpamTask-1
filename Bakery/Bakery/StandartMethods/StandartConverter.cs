@@ -92,14 +92,10 @@ namespace Bakery.StandartMethods
         /// <returns>Ingredient tuple</returns>
         private (string name, double cost, int calories) ConvertStringToIngredient(string @string)
         {
-            string name;
-            double cost;
-            int calories;
-
             Match ingredientString = ingredientRegex.Match(@string);
-            name = ingredientString.Groups[1].Value;
-            cost = Convert.ToDouble(ingredientString.Groups[4].Value);
-            calories = Convert.ToInt32(ingredientString.Groups[3].Value);
+            string name = ingredientString.Groups[1].Value;
+            double cost = Convert.ToDouble(ingredientString.Groups[4].Value);
+            int calories = Convert.ToInt32(ingredientString.Groups[3].Value);
 
             return (name, cost, calories);
         }

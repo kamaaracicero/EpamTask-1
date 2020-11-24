@@ -46,6 +46,7 @@
     <Compile Include="Comparers\CostComparer.cs" />
     <Compile Include="Comparers\TotalCostComparer.cs" />
     <Compile Include="Comparers\TypeOfSort.cs" />
+    <Compile Include="DoubleExtension.cs" />
     <Compile Include="Interfaces\IBakeryConverter.cs" />
     <Compile Include="Interfaces\IBakeryReader.cs" />
     <Compile Include="Interfaces\IBakerySaver.cs" />

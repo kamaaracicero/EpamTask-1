@@ -88,11 +88,8 @@ namespace Bakery
         public Product(string name, int amount, int markup, List<(string name, double cost, int calories)> ingredients) 
         {
             Name = name;
-            Amount += amount;
-
-            if (this.markup > 0) { this.markup = (this.markup + markup) / 2; }
-            else this.markup = markup;
-
+            Amount = amount;
+            this.markup = markup;
             this.ingredients = ingredients;
         }
 

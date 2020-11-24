@@ -156,23 +156,34 @@ namespace Bakery
         }
 
         /// <summary>
-        /// Find all foods with a specified price and calorie count
+        /// Return product class clone
+        /// </summary>
+        /// <param name="index">Product index</param>
+        /// <returns>Product class clone</returns>
+        public Product GetProductByIndex(int index)
+        {
+            return products[index].Clone() as Product;
+        }
+
+        /// <summary>
+        /// Find all products with a specified price and calorie count
         /// </summary>
         /// <param name="cost">Product price</param>
         /// <param name="calories">Calorie count</param>
         /// <returns>String with all products</returns>
-        public string FindProducts(int cost, int calories)
+        public string[] FindProducts(double cost, int calories)
         {
-            StringBuilder @string = new StringBuilder();
-            @string.Append("Matches:\n");
+            string[] prodStrings = new string[products.Count];
+            int index = 0;
             foreach(Product product in products)
             {
-                if(product.Cost == cost && product.Calories == calories)
+                if (/*product.Cost == cost*/ product.Cost.EqualTo(cost, 0.001) && product.Calories == calories)
                 {
-                    @string.Append(product.Name + "\n");
+                    prodStrings[index] = product.Name;
+                    index++;
                 }
             }
-            return @string.ToString();
+            return prodStrings;
         }
 
         /// <summary>
@@ -181,18 +192,19 @@ namespace Bakery
         /// <param name="ingredientName">Name of the specified ingredient</param>
         /// <param name="calories">Volume(here the calorie value is used)</param>
         /// <returns>String with all products</returns>
-        public string FindProducts(string ingredientName, int calories)
+        public string[] FindProducts(string ingredientName, int calories)
         {
-            StringBuilder @string = new StringBuilder();
-            @string.Append("Products:\n");
+            string[] prodStrings = new string[products.Count];
+            int index = 0;
             foreach(Product product in products)
             {
                 if(product.IsContain(ingredientName, calories))
                 {
-                    @string.Append(product.Name + "\n");
+                    prodStrings[index] = product.Name;
+                    index++;
                 }
             }
-            return @string.ToString();
+            return prodStrings;
         }
 
         /// <summary>

@@ -12,6 +12,7 @@ namespace Bakery.StandartMethods
             {
                 strings = reader.ReadToEnd().Split('\n');
             }
+            file.Close();
             return strings;
         }
     }

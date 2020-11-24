@@ -20,7 +20,7 @@ Ricca Amount:6 Markup:70%
 	Sugar 0,37kg 1000cal 4$ 
 	Water 0,1kg 0cal 5$
 	Flour 0,48kg 500cal 6$
-Kiticat Amount:2 Markup:10%
+Cookies Amount:2 Markup:10%
 	Sugar 0,37kg 0cal 0,1$ 
 	Water 0,1kg 0cal 0,1$
 	Flour 0,48kg 0cal 0,1$
