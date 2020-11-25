@@ -38,7 +38,7 @@ namespace Bakery
         /// <summary>
         /// Main file
         /// </summary>
-        readonly FileStream mainFile;
+        //readonly FileStream mainFile;
 
         /// <summary>
         /// List of products
@@ -52,12 +52,12 @@ namespace Bakery
         /// <param name="saver">Class for saving data</param>
         /// <param name="converter">Class for converting file</param>
         /// <param name="file">Main file</param>
-        public Bakery(IBakeryReader reader, IBakerySaver saver, IBakeryConverter converter, FileStream file)
+        public Bakery(IBakeryReader reader, IBakerySaver saver, IBakeryConverter converter/*, FileStream file*/)
         {
             this.reader = reader;
             this.saver = saver;
             this.converter = converter;
-            mainFile = file;
+            //mainFile = file;
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace Bakery
         /// <param name="reader">Class for reading file</param>
         /// <param name="saver">Class for saving data</param>
         /// <param name="converter">Class for converting file</param>
-        public Bakery(IBakeryReader reader, IBakerySaver saver, IBakeryConverter converter) : this (reader, saver, converter, new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite))
-        { }
+        //public Bakery(IBakeryReader reader, IBakerySaver saver, IBakeryConverter converter) : this (reader, saver, converter/*, new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite)*/)
+        //{ }
         
         /// <summary>
         /// Empty constructor
@@ -225,7 +225,7 @@ namespace Bakery
 
         public void Save()
         {
-            saver.Save(products, mainFile, MessageEvent);
+            //saver.Save(products, mainFile, MessageEvent);
         }
 
         /// <summary>
