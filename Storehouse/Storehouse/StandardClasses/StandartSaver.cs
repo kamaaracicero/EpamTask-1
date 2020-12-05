@@ -18,7 +18,7 @@ namespace Storehouse.StandardClasses
             using (FileStream file = new FileStream(path, FileMode.Create))
             {
                 serial.WriteObject(file, products);
-            }   
+            }
         }
     }
 }

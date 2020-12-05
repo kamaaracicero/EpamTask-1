@@ -95,7 +95,7 @@ namespace TestsForStorage
 
             Assert.Equal(2, storage.products.Count);
         }
-            
+
         [Fact]
         public void Test_Folding_2()
         {

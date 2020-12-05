@@ -40,7 +40,8 @@ namespace Storehouse.Products
         /// <summary>
         /// Actual product cost per unit
         /// </summary>
-        public double Cost { 
+        public double Cost
+        {
             get
             {
                 return PurchasePrice * ((Markup / 100) + 1);
@@ -54,7 +55,8 @@ namespace Storehouse.Products
         /// <summary>
         /// Cost for all production
         /// </summary>
-        public double FullCost {
+        public double FullCost
+        {
             get
             {
                 return Cost * Amount;
@@ -84,7 +86,7 @@ namespace Storehouse.Products
         /// Constructor for heirs
         /// </summary>
         /// <param name="name"></param>
-        protected Product(string name) : this (name, 0.0, 0, 0)
+        protected Product(string name) : this(name, 0.0, 0, 0)
         { }
 
         /// <summary>

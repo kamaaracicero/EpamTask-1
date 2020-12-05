@@ -23,7 +23,7 @@ namespace Storehouse.Products
         /// </summary>
         /// <param name="price">Purchase price</param>
         /// <param name="amount">Amount</param>
-        public Rubber(double price, int amount) : this (price, 30, amount)
+        public Rubber(double price, int amount) : this(price, 30, amount)
         { }
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace Storehouse
         /// <summary>
         /// Standart empty constructor
         /// </summary>
-        public Storage() : this (new StandartReader(), new StandartSaver())
+        public Storage() : this(new StandartReader(), new StandartSaver())
         { }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Storehouse
             {
                 for (int indexS = indexF + 1; indexS < products.Count; indexS++)
                 {
-                    if(Product.IsIdenticalProduct(products[indexF], products[indexS]))
+                    if (Product.IsIdenticalProduct(products[indexF], products[indexS]))
                     {
                         products[indexF] += products[indexS];
                         products.RemoveAt(indexS);
@@ -101,7 +101,7 @@ namespace Storehouse
         /// <param name="amount">Number of product</param>
         public void AddRegisteredProduct(RegisteredProducts product, double price, int amount)
         {
-            switch(product)
+            switch (product)
             {
                 case RegisteredProducts.LAPTOP:
                     products.Add(new Laptop(price, amount));
@@ -175,7 +175,7 @@ namespace Storehouse
             {
                 bool _flag = true;
                 int index = 0;
-                while(_flag)
+                while (_flag)
                 {
                     if (products[index].Name.ToLower() == name.ToLower())
                     {
@@ -214,7 +214,7 @@ namespace Storehouse
         public override string ToString()
         {
             StringBuilder @string = new StringBuilder();
-            foreach(Product product in products)
+            foreach (Product product in products)
             {
                 @string.Append(product.Name + "\n\tPrice: " + product.PurchasePrice + "\n\tAmount: " + product.Amount + "\n\tMarkup: " + product.Markup + "\n");
             }
