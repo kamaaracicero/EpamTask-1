@@ -9,7 +9,7 @@ namespace Storehouse.Interfaces
     public interface IStorageReader
     {
         /// <summary>
-        /// Method for serializing product list to .json file
+        /// Method for serializing product list from .json file
         /// </summary>
         /// <param name="path">The path to a readable file</param>
         /// <returns>List of products</returns>

@@ -6,6 +6,9 @@ using System.Runtime.Serialization.Json;
 
 namespace Storehouse.StandardClasses
 {
+    /// <summary>
+    /// Standart reader class
+    /// </summary>
     internal class StandartReader : IStorageReader
     {
         public List<Product> ReadJsonFile(string path)

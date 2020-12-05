@@ -1,7 +1,5 @@
 ﻿using Storehouse.Products;
 using System.Collections.Generic;
-using System;
-using System.Text;
 
 namespace Storehouse.Interfaces
 {
@@ -10,6 +8,11 @@ namespace Storehouse.Interfaces
     /// </summary>
     public interface IStorageSaver
     {
+        /// <summary>
+        /// Method for serializing product list to .json file
+        /// </summary>
+        /// <param name="products">List of products</param>
+        /// <param name="path">File path</param>
         public void SaveInJson(List<Product> products, string path);
     }
 }

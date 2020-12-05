@@ -6,6 +6,9 @@ using System.Runtime.Serialization.Json;
 
 namespace Storehouse.StandardClasses
 {
+    /// <summary>
+    /// Standart saver class
+    /// </summary>
     internal class StandartSaver : IStorageSaver
     {
         public void SaveInJson(List<Product> products, string path)
@@ -15,7 +18,7 @@ namespace Storehouse.StandardClasses
             using (FileStream file = new FileStream(path, FileMode.Create))
             {
                 serial.WriteObject(file, products);
-            }
+            }   
         }
     }
 }

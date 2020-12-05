@@ -9,12 +9,21 @@ namespace Storehouse.Products
     public class Laptop : Product
     {
         /// <summary>
-        /// Standart constructor
+        /// Standart constructor. Create product with not standart markup
+        /// </summary>
+        /// <param name="price">Purchase price</param>
+        /// <param name="markup">Product not standart markup</param>
+        /// <param name="amount">Amount</param>
+        public Laptop(double price, int markup, int amount)
+            : base("Laptop", price, markup, amount)
+        { }
+
+        /// <summary>
+        /// Standart constructor. Create product with standart markup
         /// </summary>
         /// <param name="price">Purchase price</param>
         /// <param name="amount">Amount</param>
-        public Laptop(double price, int amount)
-            : base("Laptop", price, 50, amount)
+        public Laptop(double price, int amount) : this(price, 50, amount)
         { }
 
         /// <summary>
@@ -29,7 +38,7 @@ namespace Storehouse.Products
         /// <param name="rubber">Reference to the Rubber class</param>
         public static explicit operator Laptop(Rubber rubber)
         {
-            return new Laptop(rubber.PurchasePrice, rubber.Amount);
+            return new Laptop(rubber.PurchasePrice, rubber.Markup, rubber.Amount);
         }
     }
 }
