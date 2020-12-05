@@ -46,10 +46,6 @@ namespace Storehouse.Products
             {
                 return PurchasePrice * ((Markup / 100) + 1);
             }
-            private set
-            {
-                Cost = value;
-            }
         }
 
         /// <summary>
@@ -60,10 +56,6 @@ namespace Storehouse.Products
             get
             {
                 return Cost * Amount;
-            }
-            private set
-            {
-                Cost = value;
             }
         }
 

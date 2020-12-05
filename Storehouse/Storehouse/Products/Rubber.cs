@@ -31,14 +31,14 @@ namespace Storehouse.Products
         /// </summary>
         public Rubber() : base("Rubber")
         { }
-
+        
         /// <summary>
-        /// Converting from Laptop to Rubber
+        /// Converting from Laptop to Rubberzz
         /// </summary>
-        /// <param name="laptop">Reference to the Laptop class</param>
-        public static explicit operator Rubber(Laptop laptop)
+        /// <param name="rubber">Reference to the Laptop class</param>
+        public static explicit operator Laptop(Rubber rubber)
         {
-            return new Rubber(laptop.PurchasePrice, laptop.Markup, laptop.Amount);
+            return new Laptop(rubber.PurchasePrice, rubber.Markup, rubber.Amount);
         }
     }
 }

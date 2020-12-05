@@ -8,6 +8,7 @@ namespace Storehouse.Products
     [DataContract]
     public class Laptop : Product
     {
+        public string Model;
         /// <summary>
         /// Standart constructor. Create product with not standart markup
         /// </summary>
@@ -31,14 +32,14 @@ namespace Storehouse.Products
         /// </summary>
         public Laptop() : base("Laptop")
         { }
-
+        
         /// <summary>
         /// Converting from Rubber to Laptop
         /// </summary>
-        /// <param name="rubber">Reference to the Rubber class</param>
-        public static explicit operator Laptop(Rubber rubber)
+        /// <param name="laptop">Reference to the Rubber class</param>
+        public static explicit operator Rubber(Laptop laptop)
         {
-            return new Laptop(rubber.PurchasePrice, rubber.Markup, rubber.Amount);
+            return new Rubber(laptop.PurchasePrice, laptop.Markup, laptop.Amount);
         }
     }
 }
