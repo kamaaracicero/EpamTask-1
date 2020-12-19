@@ -43,11 +43,11 @@ namespace ChildrensTable
         }
 
         /// <summary>
-        /// Method for creating figure
+        /// Method for creating a figure
         /// </summary>
         /// <param name="shape">Figure shape</param>
         /// <param name="material">Figure material</param>
-        /// <param name="sides"></param>
+        /// <param name="sides">Figure sides</param>
         public void CreateFigure(FigureShape shape, Material material, params double[] sides)
         {
             switch (shape)
@@ -97,6 +97,11 @@ namespace ChildrensTable
             }
         }
 
+        /// <summary>
+        /// Method for a painting created figures
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="color"></param>
         public void DueFigureByIndex(int index, Color color)
         {
             try
@@ -109,6 +114,9 @@ namespace ChildrensTable
             }
         }
 
+        /// <summary>
+        /// Put all created figures in box
+        /// </summary>
         public void PutAllFiguresInBox()
         {
             try
@@ -132,7 +140,6 @@ namespace ChildrensTable
                 MessageEvent?.Invoke(ex.Message);
             }
         }
-
 
         public override string ToString()
         {
