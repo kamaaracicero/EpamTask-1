@@ -8,13 +8,46 @@ namespace ChildrensTable
 {
     public class Table
     {
-        public delegate void MessageHandler(string mes);
+        /// <summary>
+        /// Message delegate
+        /// </summary>
+        /// <param name="message"></param>
+        public delegate void MessageHandler(string message);
+
+        /// <summary>
+        /// Event for message
+        /// </summary>
         public event MessageHandler MessageEvent;
 
-        public Box box = new Box();
-
+        /// <summary>
+        /// List of created figures
+        /// </summary>
         public List<Figure> createdFigures = new List<Figure>();
 
+        /// <summary>
+        /// Box class
+        /// </summary>
+        public Box Box = new Box();
+
+        /// <summary>
+        /// Standart constructor
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public Figure this[int index]
+        {
+            get
+            {
+                return createdFigures[index];
+            }
+        }
+
+        /// <summary>
+        /// Method for creating figure
+        /// </summary>
+        /// <param name="shape">Figure shape</param>
+        /// <param name="material">Figure material</param>
+        /// <param name="sides"></param>
         public void CreateFigure(FigureShape shape, Material material, params double[] sides)
         {
             switch (shape)
@@ -80,7 +113,7 @@ namespace ChildrensTable
         {
             try
             {
-                box.AddFigure(createdFigures, MessageEvent);
+                this.Box.AddFigure(createdFigures, MessageEvent);
             }
             catch (Exception ex)
             {
@@ -92,7 +125,7 @@ namespace ChildrensTable
         {
             try
             {
-                box.AddFigure(createdFigures[index]);
+                this.Box.AddFigure(createdFigures[index]);
             }
             catch (Exception ex)
             {
@@ -100,17 +133,6 @@ namespace ChildrensTable
             }
         }
 
-        public void SaveFiguresInBox(string path)
-        {
-            try
-            {
-                box.Save(path);
-            }
-            catch (Exception ex)
-            {
-                MessageEvent?.Invoke(ex.Message);
-            }
-        }
 
         public override string ToString()
         {
@@ -124,7 +146,7 @@ namespace ChildrensTable
                 }
             }
             else @string.Append("\t--Empty--\n");
-            @string.Append(box);
+            @string.Append(Box);
             return @string.ToString();
         }
     }

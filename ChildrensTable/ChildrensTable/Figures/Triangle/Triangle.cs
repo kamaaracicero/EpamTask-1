@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ChildrensTable.Figures
 {
+    /// <summary>
+    /// Triangle class
+    /// </summary>
     [Serializable]
     public abstract class Triangle : Figure
     {

@@ -11,7 +11,7 @@ namespace ChildrensTable
 {
     public static class XmlHelper
     {
-        public static void SaveInXml_Writer(string path, List<Figure> list)
+        public static void SaveInXml_StreamWriter(string path, List<Figure> list)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Figure>));
 
@@ -20,6 +20,57 @@ namespace ChildrensTable
                 using (StreamWriter writer = new StreamWriter(file))
                     serializer.Serialize(writer, list);
             }
+        }
+
+        public static void SaveInXml_XmlWriter(string path, List<Figure> list)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Figure>));
+
+            using (FileStream file = new FileStream(path, FileMode.Create))
+            {
+                var settings = new XmlWriterSettings();
+                settings.Encoding = Encoding.UTF8;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+                settings.NewLineOnAttributes = false;
+                using (XmlWriter writer = XmlWriter.Create(file, settings))
+                    serializer.Serialize(writer, list);
+            }
+        }
+
+
+        public static List<Figure> ReadFromXml_StreamReader(string path)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Figure>));
+            List<Figure> list;
+            using (FileStream file = new FileStream(path, FileMode.Open))
+            {
+                using (StreamReader reader = new StreamReader(file))
+                {
+                    list = serializer.Deserialize(reader) as List<Figure>;
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Read list from xml using XmlReader
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static List<Figure> ReadFromXml_XmlReader(string path)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Figure>));
+            List<Figure> list;
+
+            using (FileStream file = new FileStream(path, FileMode.Open))
+            {
+                using (XmlReader reader = XmlReader.Create(file))
+                {
+                    list = serializer.Deserialize(reader) as List<Figure>;
+                }
+            }
+            return list;
         }
 
     }

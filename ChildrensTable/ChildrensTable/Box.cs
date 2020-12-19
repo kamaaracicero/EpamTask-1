@@ -114,7 +114,7 @@ namespace ChildrensTable
         }
 
         /// <summary>
-        /// Find the index of a shape for a given pattern
+        /// Find the index of a figure for a given pattern
         /// </summary>
         /// <param name="figure">Pattern</param>
         /// <returns>Index</returns>
@@ -201,7 +201,10 @@ namespace ChildrensTable
             return figures;
         }
 
-
+        /// <summary>
+        /// Returns list of plastic figures, that weren't due
+        /// </summary>
+        /// <returns></returns>
         public List<Figure> GetAllPlasticNoColor()
         {
             List<Figure> figures = new List<Figure>();
@@ -218,9 +221,41 @@ namespace ChildrensTable
             return figures;
         }
 
-        public void Save(string path)
+        /// <summary>
+        /// Saving all stored figures
+        /// </summary>
+        /// <param name="path">File path</param>
+        /// <param name="mode">false:using XmlWriter; true:using StreamReader</param>
+        public void Save(string path, bool mode = false)
         {
-            XmlHelper.SaveInXml_Writer(path, storedFigures);
+            switch (mode)
+            {
+                case false:
+                    XmlHelper.SaveInXml_XmlWriter(path, storedFigures);
+                    break;
+                case true:
+                    XmlHelper.SaveInXml_StreamWriter(path, storedFigures);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Load list of figures from file
+        /// </summary>
+        /// <param name="path">File path</param>
+        /// <param name="mode">false:using XmlWriter; true:using StreamReader</param>
+        public void Load(string path, bool mode = false)
+        {
+            switch (mode)
+            {
+                case false:
+                    storedFigures = XmlHelper.ReadFromXml_XmlReader(path);
+                    break;
+                case true:
+                    storedFigures = XmlHelper.ReadFromXml_StreamReader(path);
+                    break;
+            }
+
         }
 
 

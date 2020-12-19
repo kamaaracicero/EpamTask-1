@@ -2,6 +2,9 @@
 
 namespace ChildrensTable.Figures
 {
+    /// <summary>
+    /// Circule class
+    /// </summary>
     [Serializable]
     public abstract class Circule : Figure
     {

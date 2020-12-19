@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 
 namespace ChildrensTable.Figures
 {
+    /// <summary>
+    /// Figure class
+    /// </summary>
     [Serializable]
     [XmlInclude(typeof(Circule))]
     [XmlInclude(typeof(FilmCircule))]

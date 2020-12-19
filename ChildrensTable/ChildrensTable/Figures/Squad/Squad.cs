@@ -2,6 +2,9 @@
 
 namespace ChildrensTable.Figures
 {
+    /// <summary>
+    /// Squad class
+    /// </summary>
     [Serializable]
     public abstract class Squad : Figure
     {

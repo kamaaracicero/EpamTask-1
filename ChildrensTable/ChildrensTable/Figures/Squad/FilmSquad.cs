@@ -3,6 +3,9 @@ using System;
 
 namespace ChildrensTable.Figures
 {
+    /// <summary>
+    /// Film squad class
+    /// </summary>
     [Serializable]
     public class FilmSquad : Squad
     {

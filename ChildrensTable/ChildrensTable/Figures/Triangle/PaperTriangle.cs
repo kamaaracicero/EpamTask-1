@@ -3,6 +3,9 @@ using System;
 
 namespace ChildrensTable.Figures
 {
+    /// <summary>
+    /// Paper triangle class
+    /// </summary>
     [Serializable]
     public class PaperTriangle : Triangle
     {
