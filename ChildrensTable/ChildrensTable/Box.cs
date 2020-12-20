@@ -101,14 +101,19 @@ namespace ChildrensTable
         /// </summary>
         /// <param name="index"></param>
         /// <param name="figure"></param>
-        internal void ReplaceByIndex(int index, Figure figure)
+        internal Figure ReplaceByIndex(int index, Figure figure)
         {
             if (index < 20 && index >= 0)
             {
+                Figure figure1 = storedFigures[index];
                 storedFigures.RemoveAt(index);
                 storedFigures.Insert(index, figure);
+                return figure1;
             }
-            else throw new BoxException("Index out of range");
+            else
+            {
+                throw new BoxException("Index out of range");
+            }
         }
 
         /// <summary>

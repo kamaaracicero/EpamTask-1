@@ -216,7 +216,7 @@ namespace ChildrensTable
         {
             try
             {
-                Box.ReplaceByIndex(newFigureindexInBox, createdFigures[curFigureIndex]);
+                createdFigures[curFigureIndex] = Box.ReplaceByIndex(newFigureindexInBox, createdFigures[curFigureIndex]);
             }
             catch (Exception ex)
             {

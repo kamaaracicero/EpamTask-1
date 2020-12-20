@@ -15,7 +15,7 @@ namespace ChildrensTable.Figures
         public Squad(Figure figure, double[] sides)
         {
             double square = Math.Pow(sides[0], 2);
-            if (figure.GetSquare() < square)
+            if (figure.GetSquare() < square || GetMaterial(this) != GetMaterial(figure))
                 throw new FigureException("Can't cut a squade from this figure");
             else
             {

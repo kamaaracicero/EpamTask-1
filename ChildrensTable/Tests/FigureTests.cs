@@ -8,7 +8,46 @@ namespace Tests
     public class FigureTests
     {
         [Fact]
-        public void CheckMethod_DueFigure_1()
+        public void ConstructorTest_GettingOneFigureFromAnother_1()
+        {
+            // Arrange
+            Figure figure = new PaperCircule(5);
+            
+            // Act
+            Figure figure1 = new PaperCircule(figure, 3);
+            double expectedPerimeter = (Math.PI * 2) * 3;
+
+            // Assert
+            Assert.Equal(expectedPerimeter, figure1.GetPerimeter());
+        }
+
+        [Fact]
+        public void ConstructorTest_GettingOneFigureFromAnother_2()
+        {
+            // Arrange
+            Figure figure = new PaperCircule(5);
+            Figure figure1;
+            // Act
+            Action act = () => figure1 = new PaperCircule(figure, 6);
+
+            // Assert
+            Assert.Throws<FigureException>(act);
+        }
+
+        [Fact]
+        public void ConstructorTest_GettingOneFigureFromAnother_3()
+        {
+            Figure figure = new PaperCircule(5);
+            Figure figure1;
+            // Act
+            Action act = () => figure1 = new FilmCircule(figure, 3);
+
+            // Assert
+            Assert.Throws<FigureException>(act);
+        }
+
+        [Fact]
+        public void MethodTest_DueFigure_1()
         {
             // Arrange
             var figure = new FilmCircule(3);
@@ -21,7 +60,7 @@ namespace Tests
         }
 
         [Fact]
-        public void CheckMethod_DueFigure_2()
+        public void MethodTest_DueFigure_2()
         {
             // Arrange
             var figure = new PaperCircule(2);
@@ -36,7 +75,7 @@ namespace Tests
         }
 
         [Fact]
-        public void CheckMethod_DueFigure_3()
+        public void MethodTest_DueFigure_3()
         {
             // Arrange
             var figure = new PlasticCircule(1);
@@ -50,7 +89,7 @@ namespace Tests
         }
 
         [Fact]
-        public void CheckMethod_GetPerimeter()
+        public void MethodTest_GetPerimeter()
         {
             double[] sizez_for_squad = new double[4] { 3, 3, 3, 3 };
             double[] sizes_for_triangle = new double[3] { 3, 4, 5 };
@@ -68,7 +107,7 @@ namespace Tests
         }
 
         [Fact]
-        public void CheckMethod_GetSquare()
+        public void MethodTest_GetSquare()
         {
             // Arrange
             double[] sizez_for_squad = new double[4] { 3, 3, 3, 3 };

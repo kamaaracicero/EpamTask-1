@@ -16,7 +16,7 @@ namespace ChildrensTable.Figures
         public Circule(Figure figure, double radius)
         {
             double square = Math.Pow(radius, 2) * Math.PI;
-            if (figure.GetSquare() < square)
+            if (figure.GetSquare() < square || GetMaterial(this) != GetMaterial(figure))
                 throw new FigureException("Can't cut a circule from this figure");
             else
             {

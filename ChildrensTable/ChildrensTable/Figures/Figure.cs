@@ -83,5 +83,16 @@ namespace ChildrensTable.Figures
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Method for getting material
+        /// </summary>
+        /// <param name="figure">Figure</param>
+        /// <returns>1 - Film;2 - Paper;3 - Plastic;</returns>
+        protected static int GetMaterial(Figure figure)
+        {
+            if (figure.GetType().Name.Contains("Film")) return 1;
+            else if (figure.GetType().Name.Contains("Paper")) return 2;
+            else return 3;
+        }
     }
 }

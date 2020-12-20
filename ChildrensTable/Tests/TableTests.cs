@@ -69,17 +69,59 @@ namespace Tests
         [Fact]
         public void MethodTest_GetFigureFromBox()
         {
+            // Arrange
             Table table = new Table();
             table.CreateFigure(FigureShape.Circule, Material.Plastic, 2);
             table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
             table.CreateFigure(FigureShape.Squad, Material.Paper, 4, 4, 4, 4);
 
+            // Act
             table.PutAllFiguresInBox();
             table.GetFigureFromBox(1);
 
+            // Assert
             Assert.Equal(2, table.Box.Count);
             Assert.Equal(1, table.Count);
             Assert.Equal("FilmTriangle", table[0].GetType().Name);
+        }
+
+        [Fact]
+        public void MethodTest_ReplaceFigureInBox()
+        {
+            // Arrange
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Circule, Material.Film, 2);
+            table.CreateFigure(FigureShape.Circule, Material.Paper, 4);
+            table.PutFigureInBox(1);
+
+            // Act
+            table.ReplaceFigureInBox(0, 0);
+
+            // Assert
+            Assert.Equal("PaperCircule", table[0].GetType().Name);
+            Assert.Equal("FilmCircule", table.ViewFigureInBox(0)?.GetType().Name);
+        }
+
+        [Fact]
+        public void MethodTest_FindFigureInBoxByPattern()
+        {
+            // Arrange
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Circule, Material.Film, 2);
+            table.CreateFigure(FigureShape.Circule, Material.Paper, 4);
+            table.CreateFigure(FigureShape.Circule, Material.Plastic, 2);
+            table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
+            table.CreateFigure(FigureShape.Squad, Material.Paper, 4, 4, 4, 4);
+            table.PutAllFiguresInBox();
+
+            double[] sides = new double[3] { 3, 3, 3 };
+            Figure pattern = new FilmTriangle(sides);
+
+            // Act
+            int index = table.FindFigureInBoxByPattern(pattern);
+
+            // Assert
+            Assert.Equal(3, index);
         }
     }
 }

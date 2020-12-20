@@ -17,7 +17,7 @@ namespace ChildrensTable.Figures
             double a = sides[0], b = sides[1], c = sides[2];
             double p = (a + b + c) / 2;
             double square = Math.Sqrt(p * (p - a) * (p - b) * (p - c));
-            if (figure.GetSquare() < square)
+            if (figure.GetSquare() < square || GetMaterial(this) != GetMaterial(figure))
                 throw new FigureException("Can't cut a triangle from this figure");
             else
             {
@@ -44,5 +44,6 @@ namespace ChildrensTable.Figures
             double p = (a + b + c) / 2;
             return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
         }
+
     }
 }
