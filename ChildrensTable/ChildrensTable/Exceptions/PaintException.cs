@@ -5,7 +5,7 @@ namespace ChildrensTable.Figures
     /// <summary>
     /// Exception for impossibility of painting
     /// </summary>
-    internal class PaintException : Exception
+    public class PaintException : Exception
     {
         /// <summary>
         /// Standart constructor

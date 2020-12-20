@@ -1,6 +1,4 @@
-﻿using System;
-using ChildrensTable;
-using ChildrensTable.Figures;
+﻿using ChildrensTable.Figures;
 using ChildrensTable.DoubleExtensions;
 using ChildrensTable.Colors;
 using System.Collections.Generic;
@@ -37,7 +35,7 @@ namespace ChildrensTable
         /// Add a single figure to the box
         /// </summary>
         /// <param name="figure">Figure</param>
-        public void AddFigure(Figure figure)
+        internal void AddFigure(Figure figure)
         {
             if (Count < capacity)
                 if (!IsAlreadyContained(figure.GetType().Name, figure.GetSides()))
@@ -51,7 +49,7 @@ namespace ChildrensTable
         /// Add multiple figures to the box.
         /// </summary>
         /// <param name="figuresList">List of figures</param>
-        public void AddFigure(List<Figure> figuresList, Table.MessageHandler messanger)
+        internal void AddFigure(List<Figure> figuresList, Table.MessageHandler messanger)
         {
             for(int index = 0; index < figuresList.Count; index++)
             {
@@ -75,7 +73,7 @@ namespace ChildrensTable
         /// </summary>
         /// <param name="index">Figure index</param>
         /// <returns></returns>
-        public Figure ViewFigureByIndex(int index)
+        internal Figure ViewFigureByIndex(int index)
         {
             if (index < 20 && index >= 0)
                 return storedFigures[index];
@@ -87,7 +85,7 @@ namespace ChildrensTable
         /// </summary>
         /// <param name="index">Figure index</param>
         /// <returns></returns>
-        public Figure GetFigureByIndex(int index)
+        internal Figure GetFigureByIndex(int index)
         {
             if (index < 20 && index >= 0)
             {
@@ -103,7 +101,7 @@ namespace ChildrensTable
         /// </summary>
         /// <param name="index"></param>
         /// <param name="figure"></param>
-        public void ReplaceByIndex(int index, Figure figure)
+        internal void ReplaceByIndex(int index, Figure figure)
         {
             if (index < 20 && index >= 0)
             {
@@ -118,7 +116,7 @@ namespace ChildrensTable
         /// </summary>
         /// <param name="figure">Pattern</param>
         /// <returns>Index</returns>
-        public int FindFigureByPattern(Figure figure)
+        internal int FindFigureByPattern(Figure figure)
         {
             string figureName = figure.GetType().Name;
             double[] figureSides = figure.GetSides();
@@ -166,7 +164,7 @@ namespace ChildrensTable
         /// </summary>
         /// <param name="shape"></param>
         /// <returns></returns>
-        public List<Figure> GetAllFigures(FigureShape shape)
+        internal List<Figure> GetAllFigures(FigureShape shape)
         {
             List<Figure> figures = new List<Figure>();
             for(int index = 0; index < storedFigures.Count; index++)
@@ -186,7 +184,7 @@ namespace ChildrensTable
         /// </summary>
         /// <param name="material"></param>
         /// <returns></returns>
-        public List<Figure> GetAllFigures(Material material)
+        internal List<Figure> GetAllFigures(Material material)
         {
             List<Figure> figures = new List<Figure>();
             for (int index = 0; index < storedFigures.Count; index++)
@@ -205,7 +203,7 @@ namespace ChildrensTable
         /// Returns list of plastic figures, that weren't due
         /// </summary>
         /// <returns></returns>
-        public List<Figure> GetAllPlasticNoColor()
+        internal List<Figure> GetAllPlasticNoColor()
         {
             List<Figure> figures = new List<Figure>();
             for (int index = 0; index < storedFigures.Count; index++)

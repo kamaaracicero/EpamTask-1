@@ -5,7 +5,7 @@ namespace ChildrensTable
     /// <summary>
     /// Exception for box congestion
     /// </summary>
-    internal class BoxCapacityException : Exception
+    public class BoxCapacityException : Exception
     {
         /// <summary>
         /// Standart constructor

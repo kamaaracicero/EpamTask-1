@@ -5,7 +5,7 @@ namespace ChildrensTable.Figures
     /// <summary>
     /// Figure class exception
     /// </summary>
-    internal class FigureException : Exception
+    public class FigureException : Exception
     {
         /// <summary>
         /// Standart constructor

@@ -22,7 +22,7 @@ namespace ChildrensTable
         /// <summary>
         /// List of created figures
         /// </summary>
-        public List<Figure> createdFigures = new List<Figure>();
+        List<Figure> createdFigures = new List<Figure>();
 
         /// <summary>
         /// Box class
@@ -129,11 +129,65 @@ namespace ChildrensTable
             }
         }
 
+        /// <summary>
+        /// Put created figure in box
+        /// </summary>
+        /// <param name="index">Figure index</param>
         public void PutFigureInBox(int index)
         {
             try
             {
                 this.Box.AddFigure(createdFigures[index]);
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// View figure in box by index
+        /// </summary>
+        /// <param name="index">Figure index</param>
+        public void ViewFigureInBox(int index)
+        {
+            try
+            {
+                var figure = Box.ViewFigureByIndex(index);
+                MessageEvent?.Invoke(figure.GetType().Name + ' ' + figure.GetSides().ToString() + ' ');
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get figure from box
+        /// </summary>
+        /// <param name="index">Figure index</param>
+        public void GetFigureFromBox(int index)
+        {
+            try
+            {
+                createdFigures.Add(Box.GetFigureByIndex(index));
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Replace figure in box by index
+        /// </summary>
+        /// <param name="newFigureindexInBox">New figure index in box</param>
+        /// <param name="curFigureIndex">Figure index in created figures list</param>
+        public void ReplaceFigureInBox(int newFigureindexInBox, int curFigureIndex)
+        {
+            try
+            {
+                Box.ReplaceByIndex(newFigureindexInBox, createdFigures[curFigureIndex]);
             }
             catch (Exception ex)
             {
