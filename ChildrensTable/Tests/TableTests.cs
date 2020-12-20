@@ -123,5 +123,70 @@ namespace Tests
             // Assert
             Assert.Equal(3, index);
         }
+
+        [Fact]
+        public void MethodTest_GetAllFiguresFromBoxByMaterial()
+        {
+            // Arrange
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Circule, Material.Film, 2);
+            table.CreateFigure(FigureShape.Circule, Material.Paper, 4);
+            table.CreateFigure(FigureShape.Circule, Material.Plastic, 2);
+            table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
+            table.CreateFigure(FigureShape.Squad, Material.Paper, 4, 4, 4, 4);
+
+            // Act
+            table.PutAllFiguresInBox();
+            table.GetAllFiguresFromBoxByMaterial(Material.Film);
+
+            // Asset
+            Assert.Equal(2, table.Count);
+            Assert.Equal(3, table.Box.Count);
+            Assert.Contains("Film", table[0].GetType().Name);
+        }
+
+        [Fact]
+        public void MethodTest_GetAllFiguresFromBoxByShape()
+        {
+            // Arrange
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Circule, Material.Film, 2);
+            table.CreateFigure(FigureShape.Circule, Material.Paper, 4);
+            table.CreateFigure(FigureShape.Circule, Material.Plastic, 2);
+            table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
+            table.CreateFigure(FigureShape.Squad, Material.Paper, 4, 4, 4, 4);
+
+            // Act
+            table.PutAllFiguresInBox();
+            table.GetAllFiguresFromBoxByShape(FigureShape.Circule);
+
+            // Arrange
+            Assert.Equal(3, table.Count);
+            Assert.Equal(2, table.Box.Count);
+            Assert.Contains("Circule", table[0].GetType().Name);
+        }
+
+        [Fact]
+        public void MethodTest_GetAllPlasticNoColor()
+        {
+            // Arrange
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Circule, Material.Plastic, 2);
+            table.CreateFigure(FigureShape.Circule, Material.Plastic, 4);
+            table.CreateFigure(FigureShape.Circule, Material.Plastic, 3);
+            table.CreateFigure(FigureShape.Triangle, Material.Plastic, 3, 3, 3);
+            table.CreateFigure(FigureShape.Squad, Material.Plastic, 4, 4, 4, 4);
+
+            // Act
+            table.DueFigureByIndex(0, Color.BLACK);
+            table.DueFigureByIndex(2, Color.GREEN);
+            table.DueFigureByIndex(4, Color.ORANGE);
+            table.PutAllFiguresInBox();
+            table.GetAllPlasticNoColor();
+
+            // Assert
+            Assert.Equal(2, table.Count);
+            Assert.Equal(Color.NO_COLOR, table[0].Color);
+        }
     }
 }
