@@ -20,6 +20,16 @@ namespace ChildrensTable
         public event MessageHandler MessageEvent;
 
         /// <summary>
+        /// Created figures count
+        /// </summary>
+        public int Count { 
+            get
+            {
+                return createdFigures.Count;
+            }
+        }
+
+        /// <summary>
         /// List of created figures
         /// </summary>
         List<Figure> createdFigures = new List<Figure>();
@@ -145,6 +155,8 @@ namespace ChildrensTable
             }
         }
 
+
+        /*      // First variant
         /// <summary>
         /// View figure in box by index
         /// </summary>
@@ -159,6 +171,23 @@ namespace ChildrensTable
             catch (Exception ex)
             {
                 MessageEvent?.Invoke(ex.Message);
+            }
+        }
+        */
+
+        // Second variant
+        public Figure ViewFigureInBox(int index)
+        {
+            Figure figure;
+            try
+            {
+                figure = Box.ViewFigureByIndex(index);
+                return figure;
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+                return null;
             }
         }
 

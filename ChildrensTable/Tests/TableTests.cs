@@ -33,5 +33,47 @@ namespace Tests
             // Assert
             Assert.Equal(Color.BLACK, table[0].Color);
         }
+
+        [Fact]
+        public void MethodTest_PutAllFiguresInBox_1()
+        {
+            // Arrange
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
+            table.CreateFigure(FigureShape.Squad, Material.Paper, 3, 3, 3, 3);
+
+            // Act
+            table.PutAllFiguresInBox();
+
+            // Assert
+            Assert.Equal(2, table.Box.Count);
+            Assert.Equal("PaperSquad", table.ViewFigureInBox(1).GetType().Name);
+        }
+
+        [Fact]
+        public void MethodTest_PutAllFiguresInBox_2()
+        {
+            // Two indentical figure;
+            // Arrange
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
+            table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
+
+            // Act
+            table.PutAllFiguresInBox();
+
+            // Assert
+            Assert.Equal(1, table.Box.Count);
+        }
+
+        [Fact]
+        public void MethodTest_GetFigureFromBox()
+        {
+            Table table = new Table();
+            table.CreateFigure(FigureShape.Circule, Material.Plastic, 2);
+            table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
+            table.CreateFigure(FigureShape.Squad, Material.Paper, 4, 4, 4, 4)
+                ;
+        }
     }
 }
