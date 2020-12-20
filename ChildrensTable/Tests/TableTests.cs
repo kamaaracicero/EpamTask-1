@@ -72,8 +72,14 @@ namespace Tests
             Table table = new Table();
             table.CreateFigure(FigureShape.Circule, Material.Plastic, 2);
             table.CreateFigure(FigureShape.Triangle, Material.Film, 3, 3, 3);
-            table.CreateFigure(FigureShape.Squad, Material.Paper, 4, 4, 4, 4)
-                ;
+            table.CreateFigure(FigureShape.Squad, Material.Paper, 4, 4, 4, 4);
+
+            table.PutAllFiguresInBox();
+            table.GetFigureFromBox(1);
+
+            Assert.Equal(2, table.Box.Count);
+            Assert.Equal(1, table.Count);
+            Assert.Equal("FilmTriangle", table[0].GetType().Name);
         }
     }
 }

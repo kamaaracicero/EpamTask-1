@@ -224,6 +224,99 @@ namespace ChildrensTable
             }
         }
 
+        /// <summary>
+        /// Method for finding figure in box by pattern
+        /// </summary>
+        /// <param name="figure">Pattern</param>
+        /// <returns>Index of this figure in box</returns>
+        public int FindFigureInBoxByPattern(Figure figure)
+        {
+            try
+            {
+                int temp = Box.FindFigureByPattern(figure);
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// Get all figures with given material from the box 
+        /// </summary>
+        /// <param name="material"></param>
+        public void GetAllFiguresFromBoxByMaterial(Material material)
+        {
+            try
+            {
+                List<Figure> list = Box.GetAllFigures(material);
+                if (list.Count != 0)
+                {
+                    foreach (Figure figure in list)
+                        createdFigures.Add(figure);
+                }
+                else
+                {
+                    MessageEvent?.Invoke("There are no figures in the box with given material");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// Get all figures from the box with given shape
+        /// </summary>
+        /// <param name="shape">Figure shapew</param>
+        public void GetAllFiguresFromBoxByShape(FigureShape shape)
+        {
+            try
+            {
+                List<Figure> list = Box.GetAllFigures(shape);
+                if (list.Count != 0)
+                {
+                    foreach (Figure figure in list)
+                        createdFigures.Add(figure);
+                }
+                else
+                {
+                    MessageEvent?.Invoke("There are no figures in the box with given material");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get all plastic figures from the box that werent due
+        /// </summary>
+        public void GetAllPlasticNoColor()
+        {
+            try
+            {
+                List<Figure> list = Box.GetAllPlasticNoColor();
+                if (list.Count != 0)
+                {
+                    foreach (Figure figure in list)
+                        createdFigures.Add(figure);
+                }
+                else
+                {
+                    MessageEvent?.Invoke("There are no figures in the box with given material");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageEvent?.Invoke(ex.Message);
+            }
+        }
+
         public override string ToString()
         {
             StringBuilder @string = new StringBuilder();
