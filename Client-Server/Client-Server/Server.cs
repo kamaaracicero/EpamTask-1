@@ -16,8 +16,6 @@ namespace Client_Server
         public delegate void MessageHandler(string mes);
         public event MessageHandler HostStatus;
 
-        public static event MessageHandler ProcessString;
-
         static TcpListener server;
 
         List<Client> clients = new List<Client>();
@@ -74,7 +72,7 @@ namespace Client_Server
             }
         }
 
-        protected internal void Disconnect()
+        public void Disconnect()
         {
             server.Stop();
             foreach (Client client in clients)

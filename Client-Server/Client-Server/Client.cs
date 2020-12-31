@@ -12,8 +12,12 @@ namespace Client_Server
         TcpClient client;
         Server server;
 
+        private delegate void StringProcessDel(string mes, string id);
+        private event StringProcessDel StringProcess;
+
         public Client(TcpClient client, Server server)
         {
+            StringProcess += Translit.TranslitString;
             Id = Guid.NewGuid().ToString();
             this.client = client;
             this.server = server;
@@ -25,11 +29,22 @@ namespace Client_Server
             try
             {
                 Stream = client.GetStream();
-                string message = GetMessage();
-                server.BroadcastMessage(message, this.Id);
+                string message;
                 while (true)
                 {
-
+                    try
+                    {
+                        message = GetMessage();
+                        if (!String.IsNullOrEmpty(message))
+                            StringProcess?.Invoke(message, Id);
+                        server.BroadcastMessage(message, this.Id);
+                    }
+                    catch
+                    {
+                        break;
+                    }
+                    finally
+                    { }
                 }
             }
             catch (Exception ex)
@@ -45,7 +60,7 @@ namespace Client_Server
         {
             byte[] data = new byte[64];
             StringBuilder builder = new StringBuilder();
-            int bytes = 0;
+            int bytes;
             do
             {
                 bytes = Stream.Read(data, 0, data.Length);
