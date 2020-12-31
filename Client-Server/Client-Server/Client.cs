@@ -7,14 +7,43 @@ namespace Client_Server
 {
     public class Client
     {
+        /// <summary>
+        /// Client id
+        /// </summary>
         protected internal string Id { get; private set; }
+
+        /// <summary>
+        /// Client stream
+        /// </summary>
         protected internal NetworkStream Stream { get; set; }
+
+        /// <summary>
+        /// Client
+        /// </summary>
         TcpClient client;
+
+        /// <summary>
+        /// Server
+        /// </summary>
         Server server;
 
+        /// <summary>
+        /// String process delegate
+        /// </summary>
+        /// <param name="mes">Message</param>
+        /// <param name="id">User id</param>
         private delegate void StringProcessDel(string mes, string id);
+
+        /// <summary>
+        /// String process event
+        /// </summary>
         private event StringProcessDel StringProcess;
 
+        /// <summary>
+        /// Standart constructor
+        /// </summary>
+        /// <param name="client">Client</param>
+        /// <param name="server">Server</param>
         public Client(TcpClient client, Server server)
         {
             StringProcess += Translit.TranslitString;
@@ -24,6 +53,9 @@ namespace Client_Server
             server.AddConnection(this);
         }
 
+        /// <summary>
+        /// Process method
+        /// </summary>
         public void Process()
         {
             try
@@ -56,6 +88,10 @@ namespace Client_Server
             }
         }
 
+        /// <summary>
+        /// Get message from client stream
+        /// </summary>
+        /// <returns>Message string</returns>
         private string GetMessage()
         {
             byte[] data = new byte[64];
@@ -71,12 +107,30 @@ namespace Client_Server
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Close client
+        /// </summary>
         protected internal void Close()
         {
             if (Stream != null)
                 Stream.Close();
             if (client != null)
                 client.Close();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

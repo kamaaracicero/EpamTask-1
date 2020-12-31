@@ -10,24 +10,56 @@ namespace Client_Server
 {
     public class Server
     {
+        /// <summary>
+        /// Server ip
+        /// </summary>
         private const string ip = "127.0.0.1";
+
+        /// <summary>
+        /// Server port
+        /// </summary>
         private const int port = 4321;
 
-        public delegate void MessageHandler(string mes);
-        public event MessageHandler HostStatus;
+        /// <summary>
+        /// Message delegate
+        /// </summary>
+        /// <param name="mes">Message</param>
+        public delegate void MessageDelegate(string mes);
 
+        /// <summary>
+        /// Host status event
+        /// </summary>
+        public event MessageDelegate HostStatus;
+
+        /// <summary>
+        /// Server
+        /// </summary>
         static TcpListener server;
 
+        /// <summary>
+        /// List of clients
+        /// </summary>
         List<Client> clients = new List<Client>();
 
+        /// <summary>
+        /// Standart empty constructor
+        /// </summary>
         public Server()
         {
             IPAddress ipAddress = IPAddress.Parse(ip);
             server = new TcpListener(ipAddress, port);
         }
 
+        /// <summary>
+        /// Add client to list
+        /// </summary>
+        /// <param name="client"></param>
         protected internal void AddConnection(Client client) => clients.Add(client);
 
+        /// <summary>
+        /// Remove client from list
+        /// </summary>
+        /// <param name="id">Client id</param>
         protected internal void RemoveConnection(string id)
         {
             Client client = clients.FirstOrDefault(c => c.Id == id);
@@ -37,6 +69,9 @@ namespace Client_Server
             }
         }
 
+        /// <summary>
+        /// Server process
+        /// </summary>
         public void Listen()
         {
             try
@@ -62,6 +97,11 @@ namespace Client_Server
             }
         }
 
+        /// <summary>
+        /// Send message from one user to rest users
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <param name="id">User id</param>
         protected internal void BroadcastMessage(string message, string id)
         {
             byte[] data = Encoding.Unicode.GetBytes(message);
@@ -72,12 +112,30 @@ namespace Client_Server
             }
         }
 
+        /// <summary>
+        /// Disconnect server
+        /// </summary>
         public void Disconnect()
         {
             server.Stop();
             foreach (Client client in clients)
                 client.Close();
             Environment.Exit(0);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }
