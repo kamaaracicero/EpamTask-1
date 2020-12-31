@@ -22,17 +22,24 @@ namespace Client_Server
             { 'э', "ie" }, { 'ю', "iy" }, { 'я', "ia" }
         };
 
+        private delegate void StringProcess(string string1, string string2); 
+
         public static void TranslitString(string @string, string id)
         {
-            StringBuilder newString = new StringBuilder();
-            foreach(char symbol in @string)
+            StringProcess process = delegate
             {
-                try { newString.Append(symbols[symbol]); }
-                catch { newString.Append(symbol); }
-            }
-            Library.Add(new UserData(id, newString.ToString()));
-            if (Library.Count % 10 == 0)
-                DataSaver.SaveListInJson(Library);
+                StringBuilder newString = new StringBuilder();
+                foreach (char symbol in @string)
+                {
+                    try { newString.Append(symbols[symbol]); }
+                    catch { newString.Append(symbol); }
+                }
+                Library.Add(new UserData(id, newString.ToString()));
+                if (Library.Count % 10 == 0)
+                    DataSaver.SaveListInJson(Library);
+            };
+
+            process(@string, id);
         }
     }
 }
