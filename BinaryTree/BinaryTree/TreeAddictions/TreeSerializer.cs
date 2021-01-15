@@ -1,27 +1,15 @@
 ﻿using System;
-using System.Xml.Serialization;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Text;
+using BinaryTree.Interfaces;
 
-namespace BinaryTree
+namespace BinaryTree.TreeAddictins
 {
-    internal class TreeSerializer
+    internal class TreeSerializer : ITreeSerializer
     {
-        private string path;
-
-        public TreeSerializer()
-        {
-            path = "data.xml";
-        }
-
-        public TreeSerializer(string path)
-        {
-            this.path = path;
-        }
-
-        public void SerializeTree(Type serType, object tree)
+        public void SerializeTree(Type serType, object tree, string path)
         {
             var serializer = new DataContractSerializer(serType);
             using (FileStream file = new FileStream(path, FileMode.Create))

@@ -11,11 +11,6 @@ namespace BinaryTree
     public class TreeNode<T> where T : IComparable
     {
         /// <summary>
-        /// Node balance
-        /// </summary>
-        public int Balance { get; set; }
-
-        /// <summary>
         /// Standart constructor
         /// </summary>
         /// <param name="data">Data</param>
