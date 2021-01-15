@@ -23,7 +23,7 @@ namespace BinaryTree.TreeAddictins
 
         public TreeNode<T> LeftRotation(TreeNode<T> node)
         {
-            TreeNode<T> newNode = node.RightNode;
+            var newNode = node.RightNode;
             node.RightNode = newNode.LeftNode;
             newNode.LeftNode = node;
             return newNode;
@@ -31,7 +31,7 @@ namespace BinaryTree.TreeAddictins
 
         public TreeNode<T> RightRotation(TreeNode<T> node)
         {
-            TreeNode<T> newNode = node.LeftNode;
+            var newNode = node.LeftNode;
             node.LeftNode = newNode.RightNode;
             newNode.RightNode = node;
             return newNode;
@@ -48,7 +48,7 @@ namespace BinaryTree.TreeAddictins
 
                 newRoot = LeftRotation(rootNode);
             }
-            else if (BranchBalance(rootNode) == 0)
+            else if (BranchBalance(rootNode) == 2)
             {
                 if (BranchBalance(rootNode.LeftNode) < 0)
                     rootNode.LeftNode = LeftRotation(rootNode.LeftNode);

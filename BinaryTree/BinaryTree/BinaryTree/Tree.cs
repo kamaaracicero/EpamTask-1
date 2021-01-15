@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using BinaryTree.Interfaces;
 using BinaryTree.TreeAddictins;
+using System.Runtime.Serialization;
 
 namespace BinaryTree
 {
+    [DataContract]
     public class Tree<T> where T : IComparable
     {
         private ITreeSerializer serializer;
@@ -14,6 +16,7 @@ namespace BinaryTree
         /// <summary>
         /// Root node
         /// </summary>
+        [DataMember]
         public TreeNode<T> RootNode { get; set; }
 
         /// <summary>
@@ -22,7 +25,7 @@ namespace BinaryTree
         public Tree()
         {
             balancer = new TreeBalancer<T>();
-            serializer = new TreeSerializer();
+            serializer = new TreeXmlSerializer();
         }
 
         /// <summary>
@@ -60,8 +63,6 @@ namespace BinaryTree
                         Add(node, currentNode.RightNode);
                 }
             }
-
-            balancer.BalanceTree(RootNode);
         }
 
         /// <summary>
@@ -71,6 +72,8 @@ namespace BinaryTree
         public void Add(T data)
         {
             Add(new TreeNode<T>(data));
+
+            RootNode = balancer.BalanceTree(RootNode);
         }
 
         /// <summary>
@@ -174,7 +177,13 @@ namespace BinaryTree
         /// </summary>
         public void SerializeTreeInXml()
         {
-            serializer.SerializeTree(typeof(TreeNode<T>), RootNode, "data.xml");
+            serializer.SerializeTree(typeof(Tree<T>), this, "data.xml");
+        }
+
+        public void DeserializeTreeFromXml()
+        {
+            Tree<T> copy = serializer.DeserializeTree(typeof(Tree<T>), "data.xml") as Tree<T>;
+            this.RootNode = copy.RootNode;
         }
 
         /// <summary>

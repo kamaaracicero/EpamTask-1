@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using BinaryTree;
 
@@ -7,7 +6,7 @@ namespace Tests
     public class SerializationTest
     {
         [Fact]
-        public void Test1()
+        public void Serialization_Test_1()
         {
             Tree<int> tree = new Tree<int>();
 
@@ -16,6 +15,16 @@ namespace Tests
             tree.Add(3);
             tree.Add(10);
             tree.SerializeTreeInXml();
+        }
+
+        [Fact]
+        public void Deserialization_Test_1()
+        {
+            Tree<int> tree = new Tree<int>();
+
+            tree.DeserializeTreeFromXml();
+
+            Assert.Equal(10, tree.RootNode.RightNode.Data);
         }
     }
 }
