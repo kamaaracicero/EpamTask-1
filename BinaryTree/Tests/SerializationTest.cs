@@ -15,7 +15,7 @@ namespace Tests
             tree.Add(4);
             tree.Add(3);
             tree.Add(10);
-            tree.SerializeTree();
+            tree.SerializeTreeInXml();
         }
     }
 }

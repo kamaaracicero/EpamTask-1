@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace BinaryTree
@@ -6,6 +7,28 @@ namespace BinaryTree
     public class Tree<T> where T : IComparable
     {
         private TreeSerializer serializer = new TreeSerializer();
+
+        private readonly int[,] turn_right = 
+        {
+            { -1, -1, +1, +1 },
+            { -1, +0, +1, +0},
+            { -1, +1, +2, +0},
+            { -2, -1, +0, +0},
+            { -2, -2, +0, +1},
+            { -2, +0, +1, -1}
+        };
+
+        private readonly int[,] turn_left =
+        {
+            { +1, -1, -2, +0},
+            { +1, +0, -1, +0},
+            { +1, +1, -1, -1},
+            { +2, +0, -1, +1},
+            { +2, +1, +0, +0},
+            { +2, +2, +0, -1}
+        };
+
+        Func<int> MathHandler;
 
         /// <summary>
         /// Root node
@@ -160,9 +183,97 @@ namespace BinaryTree
         /// <param name="data">Data</param>
         public void DeleteNode(T data) => DeleteNode(FindNode(data));
 
-        public void SerializeTree()
+        /// <summary>
+        /// Serialize tree in xml file
+        /// </summary>
+        public void SerializeTreeInXml()
         {
             serializer.SerializeTree(typeof(TreeNode<T>), RootNode);
+        }
+
+        /// <summary>
+        /// Convert binary tree in list
+        /// </summary>
+        /// <param name="list">Ref list</param>
+        /// <param name="startNode">StartNode</param>
+        public void ToList(ref List<T> list, TreeNode<T> startNode)
+        {
+            list.Add(startNode.Data);
+            if (startNode.LeftNode != null)
+                ToList(ref list, startNode.LeftNode);
+            if (startNode.RightNode != null)
+                ToList(ref list, startNode.RightNode);
+        }
+
+        /// <summary>
+        /// Convert binary tree in list
+        /// </summary>
+        /// <param name="list">Ref list</param>
+        public void ToList(ref List<T> list) => ToList(ref list, RootNode);
+
+
+        public void BalanceTree()
+        {
+            
+
+        }
+
+
+        private TreeNode<T> TurnBranchRight(TreeNode<T> node)
+        {
+            TreeNode<T> nodeLeft = node.LeftNode;
+            TreeNode<T> nodeLeftRight = nodeLeft.RightNode;
+
+            nodeLeft.RightNode = node;
+            node.LeftNode = nodeLeftRight;
+
+            for (int n = 0; n < 6; n++)
+                if (turn_right[n,0] == node.Balance && turn_right[n,1] == nodeLeft.Balance)
+                {
+                    nodeLeft.Balance = turn_right[n, 2];
+                    node.Balance = turn_right[n, 3];
+                    break;
+                }
+            return nodeLeft;
+        }
+
+        private TreeNode<T> TurnBranchLeft(TreeNode<T> node)
+        {
+            TreeNode<T> nodeRight = node.RightNode;
+            TreeNode<T> nodeRightLeft = nodeRight.LeftNode;
+
+            nodeRight.LeftNode = node;
+            node.RightNode = nodeRightLeft;
+
+            for (int n = 0; n < 6; n++)
+                if (turn_left[n,0]==node.Balance && turn_left[n,1]==nodeRight.Balance)
+                {
+                    nodeRight.Balance = turn_left[n, 2];
+                    node.Balance = turn_left[n, 3];
+                    break;
+                }
+            return nodeRight;
+        }
+
+        private bool BalanceInsert(TreeNode<T> startNode)
+        {
+            TreeNode<T> node = startNode;
+
+            if (node.Balance > 1)
+            {
+                if (node.RightNode.Balance < 0)
+                    node.RightNode = TurnBranchRight(node.RightNode);
+                startNode = TurnBranchLeft(node);
+                return true;
+            }
+            if (node.Balance < -1)
+            {
+                if (node.LeftNode.Balance > 0) 
+                    node.LeftNode = TurnBranchLeft(node.LeftNode);
+                startNode = TurnBranchRight(node);
+                return true;
+            }
+            return false;
         }
 
 
